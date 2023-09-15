@@ -1,0 +1,47 @@
+[
+  {
+    "listing": "/projects/academic_success/index.html",
+    "items": [
+      "/projects/academic_success/report_1/index.html",
+      "/projects/academic_success/report_2/index.html"
+    ]
+  },
+  {
+    "listing": "/projects/product/index.html",
+    "items": [
+      "/projects/product/modeling/index.html",
+      "/projects/product/matriculation_forecasting_error/index.html"
+    ]
+  },
+  {
+    "listing": "/projects/operations/index.html",
+    "items": [
+      "/projects/operations/report_example/index.html"
+    ]
+  },
+  {
+    "listing": "/projects/admissions/index.html",
+    "items": []
+  },
+  {
+    "listing": "/projects/delivery/index.html",
+    "items": [
+      "/projects/delivery/time_to_completion/index.html"
+    ]
+  },
+  {
+    "listing": "/projects/legal/index.html",
+    "items": []
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/projects/academic_success/report_1/index.html",
+      "/projects/operations/report_example/index.html",
+      "/projects/product/modeling/index.html",
+      "/projects/product/matriculation_forecasting_error/index.html",
+      "/projects/delivery/time_to_completion/index.html",
+      "/projects/academic_success/report_2/index.html"
+    ]
+  }
+]

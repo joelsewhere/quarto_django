@@ -1,0 +1,1124 @@
+{% load static %}
+{% load tags %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+        <script>
+    function CopyToClipboard(id)
+    {
+        var copyText = document.getElementById(id);
+
+        // Select the text field
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText.value);
+
+        var button = document.getElementById("copy-button")
+        button.style.background = "grey";
+        button.textContent = 'Copied!'
+    }
+    </script>
+    <textarea id="share_link" style="display: none;">{% call_method request.user 'generate_share_link' request.path %}</textarea>
+        
+        <!DOCTYPE html>
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta charset="utf-8"/>
+<meta content="quarto-1.3.361" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport"/>
+<title>Irondata - So why is this happening?</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+<script src="{% static 'site_libs/quarto-nav/quarto-nav.js' %}"></script>
+<script src="{% static 'site_libs/quarto-nav/headroom.min.js' %}"></script>
+<script src="{% static 'site_libs/clipboard/clipboard.min.js' %}"></script>
+<script src="{% static 'site_libs/quarto-search/autocomplete.umd.js' %}"></script>
+<script src="{% static 'site_libs/quarto-search/fuse.min.js' %}"></script>
+<script src="{% static 'site_libs/quarto-search/quarto-search.js' %}"></script>
+<meta content="../../../" name="quarto:offset"/>
+<script src="{% static 'site_libs/quarto-html/quarto.js' %}"></script>
+<script src="{% static 'site_libs/quarto-html/popper.min.js' %}"></script>
+<script src="{% static 'site_libs/quarto-html/tippy.umd.min.js' %}"></script>
+<script src="{% static 'site_libs/quarto-html/anchor.min.js' %}"></script>
+<link href="{% static 'site_libs/quarto-html/tippy.css' %}" rel="stylesheet"/>
+<link href="{% static 'site_libs/quarto-html/quarto-syntax-highlighting.css' %}" id="quarto-text-highlighting-styles" rel="stylesheet"/>
+<script src="{% static 'site_libs/bootstrap/bootstrap.min.js' %}"></script>
+<link href="{% static 'site_libs/bootstrap/bootstrap-icons.css' %}" rel="stylesheet"/>
+<link data-mode="light" href="{% static 'site_libs/bootstrap/bootstrap.min.css' %}" id="quarto-bootstrap" rel="stylesheet"/>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script crossorigin="anonymous" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+<script crossorigin="anonymous" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<link href="{% static 'styles.css' %}" rel="stylesheet"/>
+</head>
+<body class="nav-fixed fullcontent">
+<div id="quarto-search-results"></div>
+<header class="headroom fixed-top" id="quarto-header">
+<nav class="navbar navbar-expand-lg navbar-dark">
+<div class="navbar-container container-fluid">
+<div class="navbar-brand-container">
+<a class="navbar-brand" href="/index.html">
+<span class="navbar-title">Irondata</span>
+</a>
+</div>
+<div class="" id="quarto-search" title="Search"></div>
+<button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarCollapse" data-bs-toggle="collapse" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarCollapse">
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/about.html" rel="" target="">
+<span class="menu-text">About</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/logout" rel="" target=""><i class="bi bi-door-closed" role="img">
+</i>
+<span class="menu-text">Logout</span></a>
+</li>
+</ul>
+<div class="quarto-navbar-tools">
+</div>
+</div> <!-- /navcollapse -->
+</div> <!-- /container-fluid -->
+</nav>
+</header>
+<!-- content -->
+<div class="quarto-container page-columns page-rows-contents page-layout-article page-navbar" id="quarto-content">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<header class="quarto-title-block default" id="title-block-header">
+<div class="quarto-title">
+<h1 class="title">So why is this happening?</h1>
+</div>
+<div class="quarto-title-meta">
+</div>
+<button class="copy-button btn btn-primary" id="copy-button" onclick="CopyToClipboard('share_link')" type="button">Copy Share Link</button></header>
+<p>title: Matriculation Modeling 60-21 Days date: 09/13/23 author: Jo-L Collins toc: true execute: echo: false cache: true</p>
+<div class="cell" data-execution_count="1036">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="co"># Initialize Hook</span></span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a><span class="im">from</span> airflow.providers.postgres.hooks.postgres <span class="im">import</span> PostgresHook</span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a>hook <span class="op">=</span> PostgresHook()</span>
+<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a aria-hidden="true" href="#cb1-6" tabindex="-1"></a><span class="co"># Load looker query for visualizing current error</span></span>
+<span id="cb1-7"><a aria-hidden="true" href="#cb1-7" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb1-8"><a aria-hidden="true" href="#cb1-8" tabindex="-1"></a>cwd <span class="op">=</span> Path(<span class="st">'.'</span>).resolve()</span>
+<span id="cb1-9"><a aria-hidden="true" href="#cb1-9" tabindex="-1"></a>looker_error_query <span class="op">=</span> (cwd <span class="op">/</span> <span class="st">'looker_error_query.sql'</span>).read_text()</span>
+<span id="cb1-10"><a aria-hidden="true" href="#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a aria-hidden="true" href="#cb1-11" tabindex="-1"></a><span class="co"># Run query and apply pivots</span></span>
+<span id="cb1-12"><a aria-hidden="true" href="#cb1-12" tabindex="-1"></a>looker_data <span class="op">=</span> (</span>
+<span id="cb1-13"><a aria-hidden="true" href="#cb1-13" tabindex="-1"></a>    hook.get_pandas_df(looker_error_query)</span>
+<span id="cb1-14"><a aria-hidden="true" href="#cb1-14" tabindex="-1"></a>        .pivot(</span>
+<span id="cb1-15"><a aria-hidden="true" href="#cb1-15" tabindex="-1"></a>            index<span class="op">=</span><span class="st">'deterministic_short_range.days_until_start'</span>,</span>
+<span id="cb1-16"><a aria-hidden="true" href="#cb1-16" tabindex="-1"></a>            columns<span class="op">=</span><span class="st">'deterministic_short_range.cohort_start_date'</span>)</span>
+<span id="cb1-17"><a aria-hidden="true" href="#cb1-17" tabindex="-1"></a>    [</span>
+<span id="cb1-18"><a aria-hidden="true" href="#cb1-18" tabindex="-1"></a>        [</span>
+<span id="cb1-19"><a aria-hidden="true" href="#cb1-19" tabindex="-1"></a>            <span class="st">'deterministic_short_range.weighted_roster_projection'</span>,</span>
+<span id="cb1-20"><a aria-hidden="true" href="#cb1-20" tabindex="-1"></a>            <span class="st">'deterministic_short_range.matriculations'</span></span>
+<span id="cb1-21"><a aria-hidden="true" href="#cb1-21" tabindex="-1"></a>            ]</span>
+<span id="cb1-22"><a aria-hidden="true" href="#cb1-22" tabindex="-1"></a>        ]</span>
+<span id="cb1-23"><a aria-hidden="true" href="#cb1-23" tabindex="-1"></a>)</span>
+<span id="cb1-24"><a aria-hidden="true" href="#cb1-24" tabindex="-1"></a></span>
+<span id="cb1-25"><a aria-hidden="true" href="#cb1-25" tabindex="-1"></a><span class="co"># Calculate Error</span></span>
+<span id="cb1-26"><a aria-hidden="true" href="#cb1-26" tabindex="-1"></a>looker_error <span class="op">=</span> (looker_data[<span class="st">'deterministic_short_range.weighted_roster_projection'</span>] <span class="op">-</span> looker_data[<span class="st">'deterministic_short_range.matriculations'</span>]).loc[<span class="dv">21</span>:<span class="dv">60</span>]</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[2023-09-13 22:48:28,954] {base.py:73} INFO - Using connection ID 'postgres_default' for task execution.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/joel/opt/anaconda3/envs/irondata2.4/lib/python3.10/site-packages/airflow/providers/common/sql/hooks/sql.py:201: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  return psql.read_sql(sql, con=conn, params=parameters, **kwargs)</code></pre>
+</div>
+</div>
+<p>In the last 3 months, matriculation projections (generated 60-21 days prior to a cohort start date) have had an average error between -5 and 10. From a probabilistic perspective, <strong>the data team’s goal is for modeling forecasts to land between -10 and 10, and we prefer to under-predict rather than over-predict</strong>, so at a high level we are quite happy with these results. They do not, however, tell the entire story.</p>
+<div class="cell" data-execution_count="1051">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>))</span>
+<span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a>looker_error.mean().plot(kind<span class="op">=</span><span class="st">'barh'</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb4-3"><a aria-hidden="true" href="#cb4-3" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Cohort Start Date'</span>)</span>
+<span id="cb4-4"><a aria-hidden="true" href="#cb4-4" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Average Forcasting Error'</span>)<span class="op">;</span></span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img class="img-fluid" src="{%  static 'Untitled_files/figure-html/cell-3-output-1.png' %}"/></p>
+</div>
+</div>
+<p>If we look at forecasting error over time, the error tells a more complex story.</p>
+<p>Overall, we are managing to stay within our error goals, but from . <strong>Notably, these errors are mostly over predicting</strong>, which is an additional cause for concern.</p>
+<div class="cell" data-execution_count="1037">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" href="#cb5-1" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">20</span>,<span class="dv">5</span>))</span>
+<span id="cb5-2"><a aria-hidden="true" href="#cb5-2" tabindex="-1"></a><span class="cf">for</span> cohort, ax <span class="kw">in</span> <span class="bu">zip</span>(looker_error.columns, axs.ravel()):</span>
+<span id="cb5-3"><a aria-hidden="true" href="#cb5-3" tabindex="-1"></a>    series <span class="op">=</span> looker_error[cohort].iloc[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb5-4"><a aria-hidden="true" href="#cb5-4" tabindex="-1"></a>    ax.plot(series.index, series.values, color<span class="op">=</span><span class="st">'#01ade2'</span>, label<span class="op">=</span><span class="st">'Error'</span>)</span>
+<span id="cb5-5"><a aria-hidden="true" href="#cb5-5" tabindex="-1"></a>    ax.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb5-6"><a aria-hidden="true" href="#cb5-6" tabindex="-1"></a>    ax.fill_between(series.index, <span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, color<span class="op">=</span><span class="st">'green'</span>, alpha<span class="op">=</span><span class="fl">.3</span>, label<span class="op">=</span><span class="st">'Error Goal'</span>)</span>
+<span id="cb5-7"><a aria-hidden="true" href="#cb5-7" tabindex="-1"></a>    ax.invert_xaxis()</span>
+<span id="cb5-8"><a aria-hidden="true" href="#cb5-8" tabindex="-1"></a>    ax.set_title(cohort)</span>
+<span id="cb5-9"><a aria-hidden="true" href="#cb5-9" tabindex="-1"></a></span>
+<span id="cb5-10"><a aria-hidden="true" href="#cb5-10" tabindex="-1"></a>handles, labels <span class="op">=</span> ax.get_legend_handles_labels()</span>
+<span id="cb5-11"><a aria-hidden="true" href="#cb5-11" tabindex="-1"></a>fig.legend(handles, labels, loc<span class="op">=</span><span class="st">'upper right'</span>)</span>
+<span id="cb5-12"><a aria-hidden="true" href="#cb5-12" tabindex="-1"></a>fig.supxlabel(<span class="st">'Days Until Cohort Start'</span>)</span>
+<span id="cb5-13"><a aria-hidden="true" href="#cb5-13" tabindex="-1"></a>fig.supylabel(<span class="st">'Forecast - Actuals'</span>, x<span class="op">=</span><span class="fl">.01</span>)</span>
+<span id="cb5-14"><a aria-hidden="true" href="#cb5-14" tabindex="-1"></a>fig.suptitle(<span class="st">'Matriculation Forecast Error - Last 90 Days'</span>)</span>
+<span id="cb5-15"><a aria-hidden="true" href="#cb5-15" tabindex="-1"></a>fig.tight_layout()</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img class="img-fluid" src="{%  static 'Untitled_files/figure-html/cell-4-output-1.png' %}"/></p>
+</div>
+</div>
+<div class="cell" data-execution_count="1058">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-hidden="true" href="#cb6-1" tabindex="-1"></a>high_error_cohorts <span class="op">=</span> [<span class="st">'2023-06-26'</span>, <span class="st">'2023-07-31'</span>, <span class="st">'2023-08-07'</span>]</span>
+<span id="cb6-2"><a aria-hidden="true" href="#cb6-2" tabindex="-1"></a>low_error_cohorts <span class="op">=</span> [<span class="st">'2023-07-10'</span>, <span class="st">'2023-07-17'</span>, <span class="st">'2023-08-21'</span>, <span class="st">'2023-08-28'</span>, <span class="st">'2023-09-11'</span>]</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="1083">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" href="#cb7-1" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb7-2"><a aria-hidden="true" href="#cb7-2" tabindex="-1"></a><span class="st">select * from (</span></span>
+<span id="cb7-3"><a aria-hidden="true" href="#cb7-3" tabindex="-1"></a><span class="st">select cohort_start_date::varchar</span></span>
+<span id="cb7-4"><a aria-hidden="true" href="#cb7-4" tabindex="-1"></a><span class="st">     , date_part(month, c.date) "month"</span></span>
+<span id="cb7-5"><a aria-hidden="true" href="#cb7-5" tabindex="-1"></a><span class="st">     , datediff(day, c.date, cohort_start_date) days_till_start</span></span>
+<span id="cb7-6"><a aria-hidden="true" href="#cb7-6" tabindex="-1"></a><span class="st">     , count(distinct cohort_uuid) num_cohorts</span></span>
+<span id="cb7-7"><a aria-hidden="true" href="#cb7-7" tabindex="-1"></a><span class="st">     , count(distinct case when modality = 'Live' then r.cohort_uuid end) num_live</span></span>
+<span id="cb7-8"><a aria-hidden="true" href="#cb7-8" tabindex="-1"></a><span class="st">     , count(distinct case when modality = 'Flex' then r.cohort_uuid end) num_flex</span></span>
+<span id="cb7-9"><a aria-hidden="true" href="#cb7-9" tabindex="-1"></a><span class="st">     , count(distinct case when modality = 'Campus' then r.cohort_uuid end) num_campus</span></span>
+<span id="cb7-10"><a aria-hidden="true" href="#cb7-10" tabindex="-1"></a><span class="st">     , count(distinct case when discipline = 'Software Engineering' then r.cohort_uuid end) num_se</span></span>
+<span id="cb7-11"><a aria-hidden="true" href="#cb7-11" tabindex="-1"></a><span class="st">     , count(distinct case when discipline = 'Data Science' then r.cohort_uuid end) num_ds</span></span>
+<span id="cb7-12"><a aria-hidden="true" href="#cb7-12" tabindex="-1"></a><span class="st">     , count(distinct case when discipline not in ('Software Engineering', 'Data Science') then r.cohort_uuid end) num_emerging</span></span>
+<span id="cb7-13"><a aria-hidden="true" href="#cb7-13" tabindex="-1"></a><span class="st">     , max(distinct case when nvl(a.application_discipline, '') = 'Software Engineering' then a.applications else 0 end) apps_se</span></span>
+<span id="cb7-14"><a aria-hidden="true" href="#cb7-14" tabindex="-1"></a><span class="st">     , max(distinct case when nvl(a.application_discipline, '') = 'Data Science' then a.applications else 0 end) apps_ds</span></span>
+<span id="cb7-15"><a aria-hidden="true" href="#cb7-15" tabindex="-1"></a><span class="st">     , max(distinct case when nvl(a.application_discipline, '') not in ('Software Engineering', 'Data Science', '') then a.applications else 0 end) apps_emerging</span></span>
+<span id="cb7-16"><a aria-hidden="true" href="#cb7-16" tabindex="-1"></a><span class="st">     , count(distinct r.learn_uuid) num_registered</span></span>
+<span id="cb7-17"><a aria-hidden="true" href="#cb7-17" tabindex="-1"></a><span class="st">     , count(distinct case when nvl(r.admitted_date, current_date) &lt;= c.date and nvl(r.committed_date, current_date) &gt; c.date then r.learn_uuid end) num_admitted</span></span>
+<span id="cb7-18"><a aria-hidden="true" href="#cb7-18" tabindex="-1"></a><span class="st">     , count(distinct case when nvl(r.committed_date, current_date) &lt;= c.date then r.learn_uuid end) num_committed</span></span>
+<span id="cb7-19"><a aria-hidden="true" href="#cb7-19" tabindex="-1"></a><span class="st">     , count(case when scholarship_amount is not null and scholarship_amount &gt; 0 then 1 end) scholarships_given</span></span>
+<span id="cb7-20"><a aria-hidden="true" href="#cb7-20" tabindex="-1"></a><span class="st">from fis.rosters r</span></span>
+<span id="cb7-21"><a aria-hidden="true" href="#cb7-21" tabindex="-1"></a><span class="st">join fis.calendar c</span></span>
+<span id="cb7-22"><a aria-hidden="true" href="#cb7-22" tabindex="-1"></a><span class="st">on c.date between r.added_to_cohort_date and nvl(r.removed_from_cohort_date, current_date)</span></span>
+<span id="cb7-23"><a aria-hidden="true" href="#cb7-23" tabindex="-1"></a><span class="st">left join (</span></span>
+<span id="cb7-24"><a aria-hidden="true" href="#cb7-24" tabindex="-1"></a></span>
+<span id="cb7-25"><a aria-hidden="true" href="#cb7-25" tabindex="-1"></a><span class="st">    select c2.date </span></span>
+<span id="cb7-26"><a aria-hidden="true" href="#cb7-26" tabindex="-1"></a><span class="st">         , a.application_discipline</span></span>
+<span id="cb7-27"><a aria-hidden="true" href="#cb7-27" tabindex="-1"></a><span class="st">         , count(distinct a.learn_uuid) applications</span></span>
+<span id="cb7-28"><a aria-hidden="true" href="#cb7-28" tabindex="-1"></a><span class="st">    from fis.admissions a</span></span>
+<span id="cb7-29"><a aria-hidden="true" href="#cb7-29" tabindex="-1"></a><span class="st">    left join fis.calendar c2</span></span>
+<span id="cb7-30"><a aria-hidden="true" href="#cb7-30" tabindex="-1"></a><span class="st">    on c2.date &gt;= a.application_submission_date</span></span>
+<span id="cb7-31"><a aria-hidden="true" href="#cb7-31" tabindex="-1"></a><span class="st">    and c2.date &lt; nvl(a.original_admitted_date, a.close_date, current_date)</span></span>
+<span id="cb7-32"><a aria-hidden="true" href="#cb7-32" tabindex="-1"></a><span class="st">    where datediff(day, a.application_submission_date, c2.date) between 0 and 90</span></span>
+<span id="cb7-33"><a aria-hidden="true" href="#cb7-33" tabindex="-1"></a><span class="st">    group by c2.date, a.application_discipline</span></span>
+<span id="cb7-34"><a aria-hidden="true" href="#cb7-34" tabindex="-1"></a><span class="st">    ) a</span></span>
+<span id="cb7-35"><a aria-hidden="true" href="#cb7-35" tabindex="-1"></a><span class="st">on c.date = a.date</span></span>
+<span id="cb7-36"><a aria-hidden="true" href="#cb7-36" tabindex="-1"></a><span class="st">where datediff(day, c.date, cohort_start_date) between 0 and 60</span></span>
+<span id="cb7-37"><a aria-hidden="true" href="#cb7-37" tabindex="-1"></a><span class="st">and cohort_start_date &gt; '2022-01-01'::date</span></span>
+<span id="cb7-38"><a aria-hidden="true" href="#cb7-38" tabindex="-1"></a><span class="st">and cohort_start_date &lt; current_date</span></span>
+<span id="cb7-39"><a aria-hidden="true" href="#cb7-39" tabindex="-1"></a><span class="st">and cohort_start_date != '2023-02-27'</span></span>
+<span id="cb7-40"><a aria-hidden="true" href="#cb7-40" tabindex="-1"></a><span class="st">group by 1, 2, 3</span></span>
+<span id="cb7-41"><a aria-hidden="true" href="#cb7-41" tabindex="-1"></a><span class="st">) cohorts</span></span>
+<span id="cb7-42"><a aria-hidden="true" href="#cb7-42" tabindex="-1"></a><span class="st">left join (</span></span>
+<span id="cb7-43"><a aria-hidden="true" href="#cb7-43" tabindex="-1"></a></span>
+<span id="cb7-44"><a aria-hidden="true" href="#cb7-44" tabindex="-1"></a><span class="st">  select matriculated_cohort_start_date::varchar cohort_start_date</span></span>
+<span id="cb7-45"><a aria-hidden="true" href="#cb7-45" tabindex="-1"></a><span class="st">       , count(*) matriculations </span></span>
+<span id="cb7-46"><a aria-hidden="true" href="#cb7-46" tabindex="-1"></a><span class="st">  from fis.admissions group by 1  </span></span>
+<span id="cb7-47"><a aria-hidden="true" href="#cb7-47" tabindex="-1"></a></span>
+<span id="cb7-48"><a aria-hidden="true" href="#cb7-48" tabindex="-1"></a><span class="st">) matriculations</span></span>
+<span id="cb7-49"><a aria-hidden="true" href="#cb7-49" tabindex="-1"></a><span class="st">on cohorts.cohort_start_date = matriculations.cohort_start_date</span></span>
+<span id="cb7-50"><a aria-hidden="true" href="#cb7-50" tabindex="-1"></a></span>
+<span id="cb7-51"><a aria-hidden="true" href="#cb7-51" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb7-52"><a aria-hidden="true" href="#cb7-52" tabindex="-1"></a></span>
+<span id="cb7-53"><a aria-hidden="true" href="#cb7-53" tabindex="-1"></a>df <span class="op">=</span> hook.get_pandas_df(query).dropna()</span>
+<span id="cb7-54"><a aria-hidden="true" href="#cb7-54" tabindex="-1"></a>df <span class="op">=</span> df.iloc[:, :<span class="op">-</span><span class="dv">2</span>].assign(matriculations<span class="op">=</span>df.iloc[:,<span class="op">-</span><span class="dv">1</span>])</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[2023-09-13 23:37:35,489] {base.py:73} INFO - Using connection ID 'postgres_default' for task execution.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/joel/opt/anaconda3/envs/irondata2.4/lib/python3.10/site-packages/airflow/providers/common/sql/hooks/sql.py:201: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  return psql.read_sql(sql, con=conn, params=parameters, **kwargs)</code></pre>
+</div>
+</div>
+<p><strong>A key driver of this problem is the variance in the number of cohorts launched between start dates.</strong></p>
+<div class="cell" data-execution_count="1085">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-hidden="true" href="#cb10-1" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb10-2"><a aria-hidden="true" href="#cb10-2" tabindex="-1"></a>(</span>
+<span id="cb10-3"><a aria-hidden="true" href="#cb10-3" tabindex="-1"></a>    df</span>
+<span id="cb10-4"><a aria-hidden="true" href="#cb10-4" tabindex="-1"></a>    .drop_duplicates(<span class="ss">f'cohort_start_date'</span>)</span>
+<span id="cb10-5"><a aria-hidden="true" href="#cb10-5" tabindex="-1"></a>    .query(<span class="ss">f'cohort_start_date.isin(</span><span class="sc">{</span>high_error_cohorts <span class="op">+</span> low_error_cohorts<span class="sc">}</span><span class="ss">)'</span>, )</span>
+<span id="cb10-6"><a aria-hidden="true" href="#cb10-6" tabindex="-1"></a>    .assign(error_group<span class="op">=</span><span class="kw">lambda</span> x: x.cohort_start_date.<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="st">'High Error'</span> <span class="cf">if</span> x <span class="kw">in</span> high_error_cohorts <span class="cf">else</span> <span class="st">'Low Error'</span>))</span>
+<span id="cb10-7"><a aria-hidden="true" href="#cb10-7" tabindex="-1"></a>    .groupby(<span class="st">'error_group'</span>)</span>
+<span id="cb10-8"><a aria-hidden="true" href="#cb10-8" tabindex="-1"></a>    .num_cohorts</span>
+<span id="cb10-9"><a aria-hidden="true" href="#cb10-9" tabindex="-1"></a>    .mean()</span>
+<span id="cb10-10"><a aria-hidden="true" href="#cb10-10" tabindex="-1"></a>    .plot(kind<span class="op">=</span><span class="st">'bar'</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb10-11"><a aria-hidden="true" href="#cb10-11" tabindex="-1"></a>)</span>
+<span id="cb10-12"><a aria-hidden="true" href="#cb10-12" tabindex="-1"></a>ax.xaxis.set_tick_params(rotation<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb10-13"><a aria-hidden="true" href="#cb10-13" tabindex="-1"></a>ax.set_xlabel(<span class="st">''</span>)</span>
+<span id="cb10-14"><a aria-hidden="true" href="#cb10-14" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Average Number</span><span class="ch">\n</span><span class="st">of Start Date Cohorts'</span>)<span class="op">;</span></span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img class="img-fluid" src="{%  static 'Untitled_files/figure-html/cell-7-output-1.png' %}"/></p>
+</div>
+</div>
+<div class="cell" data-execution_count="656">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-hidden="true" href="#cb11-1" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor, NearestNeighbors</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="657">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-hidden="true" href="#cb12-1" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb12-2"><a aria-hidden="true" href="#cb12-2" tabindex="-1"></a></span>
+<span id="cb12-3"><a aria-hidden="true" href="#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a aria-hidden="true" href="#cb12-4" tabindex="-1"></a></span>
+<span id="cb12-5"><a aria-hidden="true" href="#cb12-5" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb12-6"><a aria-hidden="true" href="#cb12-6" tabindex="-1"></a></span>
+<span id="cb12-7"><a aria-hidden="true" href="#cb12-7" tabindex="-1"></a>matriculations <span class="op">=</span> hook.get_pandas_df(query)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[2023-09-13 19:35:25,608] {base.py:73} INFO - Using connection ID 'postgres_default' for task execution.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/joel/opt/anaconda3/envs/irondata2.4/lib/python3.10/site-packages/airflow/providers/common/sql/hooks/sql.py:201: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  return psql.read_sql(sql, con=conn, params=parameters, **kwargs)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="248">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-hidden="true" href="#cb15-1" tabindex="-1"></a>matriculations</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="248">
+<div>
+<table class="dataframe table table-sm table-striped small" data-border="1" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">cohort_start_date</th>
+<th data-quarto-table-cell-role="th">matriculations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>None</td>
+<td>786702</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2022-10-31</td>
+<td>175</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2020-09-28</td>
+<td>126</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2020-07-27</td>
+<td>144</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2023-01-30</td>
+<td>133</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">118</td>
+<td>2020-09-14</td>
+<td>117</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">119</td>
+<td>2023-04-03</td>
+<td>98</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">120</td>
+<td>2023-07-10</td>
+<td>29</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">121</td>
+<td>2023-06-12</td>
+<td>62</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">122</td>
+<td>2020-07-12</td>
+<td>29</td>
+</tr>
+</tbody>
+</table>
+<p>123 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="914">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="914">
+<div>
+<table class="dataframe table table-sm table-striped small" data-border="1" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">num_cohorts</th>
+<th data-quarto-table-cell-role="th">num_se</th>
+<th data-quarto-table-cell-role="th">num_ds</th>
+<th data-quarto-table-cell-role="th">num_flex</th>
+<th data-quarto-table-cell-role="th">num_live</th>
+<th data-quarto-table-cell-role="th">num_admitted</th>
+<th data-quarto-table-cell-role="th">num_committed</th>
+<th data-quarto-table-cell-role="th">relevant_apps</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">11</td>
+<td>171</td>
+<td>76</td>
+<td>38</td>
+<td>76</td>
+<td>57</td>
+<td>798</td>
+<td>5377</td>
+<td>315305</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">12</td>
+<td>225</td>
+<td>100</td>
+<td>50</td>
+<td>100</td>
+<td>75</td>
+<td>1800</td>
+<td>6800</td>
+<td>418350</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">13</td>
+<td>80</td>
+<td>40</td>
+<td>10</td>
+<td>40</td>
+<td>30</td>
+<td>20</td>
+<td>2480</td>
+<td>163510</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">14</td>
+<td>234</td>
+<td>104</td>
+<td>52</td>
+<td>104</td>
+<td>78</td>
+<td>1716</td>
+<td>6890</td>
+<td>435474</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">15</td>
+<td>90</td>
+<td>40</td>
+<td>20</td>
+<td>40</td>
+<td>30</td>
+<td>70</td>
+<td>2580</td>
+<td>167000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2327</td>
+<td>57</td>
+<td>57</td>
+<td>0</td>
+<td>57</td>
+<td>0</td>
+<td>513</td>
+<td>627</td>
+<td>224865</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2328</td>
+<td>51</td>
+<td>51</td>
+<td>0</td>
+<td>51</td>
+<td>0</td>
+<td>663</td>
+<td>663</td>
+<td>204612</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2329</td>
+<td>59</td>
+<td>59</td>
+<td>0</td>
+<td>59</td>
+<td>0</td>
+<td>531</td>
+<td>413</td>
+<td>230808</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2330</td>
+<td>52</td>
+<td>52</td>
+<td>0</td>
+<td>52</td>
+<td>0</td>
+<td>572</td>
+<td>624</td>
+<td>208884</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2331</td>
+<td>58</td>
+<td>58</td>
+<td>0</td>
+<td>58</td>
+<td>0</td>
+<td>638</td>
+<td>464</td>
+<td>228404</td>
+</tr>
+</tbody>
+</table>
+<p>1830 rows × 8 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="922">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-hidden="true" href="#cb17-1" tabindex="-1"></a></span>
+<span id="cb17-2"><a aria-hidden="true" href="#cb17-2" tabindex="-1"></a></span>
+<span id="cb17-3"><a aria-hidden="true" href="#cb17-3" tabindex="-1"></a><span class="kw">def</span> relevant_apps(row):</span>
+<span id="cb17-4"><a aria-hidden="true" href="#cb17-4" tabindex="-1"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb17-5"><a aria-hidden="true" href="#cb17-5" tabindex="-1"></a>    <span class="cf">if</span> row.num_se <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb17-6"><a aria-hidden="true" href="#cb17-6" tabindex="-1"></a>        total <span class="op">+=</span> row.apps_se</span>
+<span id="cb17-7"><a aria-hidden="true" href="#cb17-7" tabindex="-1"></a>    <span class="cf">if</span> row.num_ds <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb17-8"><a aria-hidden="true" href="#cb17-8" tabindex="-1"></a>        total <span class="op">+=</span> row.apps_ds</span>
+<span id="cb17-9"><a aria-hidden="true" href="#cb17-9" tabindex="-1"></a>    <span class="cf">if</span> row.num_emerging <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb17-10"><a aria-hidden="true" href="#cb17-10" tabindex="-1"></a>        total <span class="op">+=</span> row.apps_emerging</span>
+<span id="cb17-11"><a aria-hidden="true" href="#cb17-11" tabindex="-1"></a>    <span class="cf">return</span> total</span>
+<span id="cb17-12"><a aria-hidden="true" href="#cb17-12" tabindex="-1"></a></span>
+<span id="cb17-13"><a aria-hidden="true" href="#cb17-13" tabindex="-1"></a>neighbors <span class="op">=</span> neighbors.assign(relevant_apps<span class="op">=</span><span class="kw">lambda</span> x: x.<span class="bu">apply</span>(relevant_apps, axis<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb17-14"><a aria-hidden="true" href="#cb17-14" tabindex="-1"></a></span>
+<span id="cb17-15"><a aria-hidden="true" href="#cb17-15" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb17-16"><a aria-hidden="true" href="#cb17-16" tabindex="-1"></a></span>
+<span id="cb17-17"><a aria-hidden="true" href="#cb17-17" tabindex="-1"></a>lr <span class="op">=</span> LinearRegression()</span>
+<span id="cb17-18"><a aria-hidden="true" href="#cb17-18" tabindex="-1"></a>features <span class="op">=</span> [<span class="st">'num_cohorts'</span>, <span class="st">'num_se'</span>, <span class="st">'num_ds'</span>,<span class="st">'num_flex'</span>, <span class="st">'num_live'</span>, <span class="st">'num_admitted'</span>, <span class="st">'num_committed'</span>, <span class="st">'month'</span>]</span>
+<span id="cb17-19"><a aria-hidden="true" href="#cb17-19" tabindex="-1"></a></span>
+<span id="cb17-20"><a aria-hidden="true" href="#cb17-20" tabindex="-1"></a>training <span class="op">=</span> neighbors.query(<span class="st">'cohort_start_date &lt; "2023-06-26"'</span>)</span>
+<span id="cb17-21"><a aria-hidden="true" href="#cb17-21" tabindex="-1"></a>testing <span class="op">=</span> neighbors.query(<span class="st">'cohort_start_date &gt;= "2023-06-26"'</span>)</span>
+<span id="cb17-22"><a aria-hidden="true" href="#cb17-22" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> training[features], testing[features], training.matriculations, testing.matriculations</span>
+<span id="cb17-23"><a aria-hidden="true" href="#cb17-23" tabindex="-1"></a>lr.fit(X_train, y_train)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="922">
+<style>#sk-container-id-125 {color: black;background-color: white;}#sk-container-id-125 pre{padding: 0;}#sk-container-id-125 div.sk-toggleable {background-color: white;}#sk-container-id-125 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-125 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-125 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-125 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-125 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-125 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-125 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-125 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-125 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-125 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-125 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-125 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-125 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-125 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-125 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-125 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-125 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-125 div.sk-item {position: relative;z-index: 1;}#sk-container-id-125 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-125 div.sk-item::before, #sk-container-id-125 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-125 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-125 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-125 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-125 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-125 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-125 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-125 div.sk-label-container {text-align: center;}#sk-container-id-125 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-125 div.sk-text-repr-fallback {display: none;}</style><div class="sk-top-container" id="sk-container-id-125"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br/>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input checked="" class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-125" type="checkbox"/><label class="sk-toggleable__label sk-toggleable__label-arrow" for="sk-estimator-id-125">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div>
+</div>
+</div>
+<div class="cell" data-execution_count="923">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-hidden="true" href="#cb18-1" tabindex="-1"></a>X_test.assign(preds<span class="op">=</span><span class="kw">lambda</span> x: lr.predict(x[features]), error<span class="op">=</span><span class="kw">lambda</span> x: x.preds <span class="op">-</span> y_test).error.hist()</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="923">
+<pre><code>&lt;AxesSubplot:&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img class="img-fluid" src="{%  static 'Untitled_files/figure-html/cell-13-output-2.png' %}"/></p>
+</div>
+</div>
+<div class="cell" data-execution_count="944">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a aria-hidden="true" href="#cb20-1" tabindex="-1"></a>plots <span class="op">=</span> []</span>
+<span id="cb20-2"><a aria-hidden="true" href="#cb20-2" tabindex="-1"></a><span class="cf">for</span> cohort <span class="kw">in</span> high_error_cohorts <span class="op">+</span> low_error_cohorts <span class="op">+</span> [<span class="st">'2023-09-11'</span>]:</span>
+<span id="cb20-3"><a aria-hidden="true" href="#cb20-3" tabindex="-1"></a></span>
+<span id="cb20-4"><a aria-hidden="true" href="#cb20-4" tabindex="-1"></a>    pred, true <span class="op">=</span> lr.predict(neighbors.query(<span class="ss">f'cohort_start_date == "</span><span class="sc">{</span>cohort<span class="sc">}</span><span class="ss">"'</span>).sort_values(<span class="st">'days_till_start'</span>, ascending<span class="op">=</span><span class="va">False</span>)[features]).mean(), neighbors.query(<span class="ss">f'cohort_start_date == "</span><span class="sc">{</span>cohort<span class="sc">}</span><span class="ss">"'</span>).matriculations.mean()</span>
+<span id="cb20-5"><a aria-hidden="true" href="#cb20-5" tabindex="-1"></a>    plots.append([cohort, pred, true, pred<span class="op">-</span>true])</span>
+<span id="cb20-6"><a aria-hidden="true" href="#cb20-6" tabindex="-1"></a>    </span>
+<span id="cb20-7"><a aria-hidden="true" href="#cb20-7" tabindex="-1"></a>error <span class="op">=</span> pd.DataFrame(plots, columns<span class="op">=</span>[<span class="st">'cohort'</span>, <span class="st">'pred'</span>, <span class="st">'true'</span>,<span class="st">'error'</span>]).set_index(<span class="st">'cohort'</span>).sort_index()</span>
+<span id="cb20-8"><a aria-hidden="true" href="#cb20-8" tabindex="-1"></a>error.error.plot(kind<span class="op">=</span><span class="st">'barh'</span>)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="944">
+<pre><code>&lt;AxesSubplot:ylabel='cohort'&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img class="img-fluid" src="{%  static 'Untitled_files/figure-html/cell-14-output-2.png' %}"/></p>
+</div>
+</div>
+<div class="cell" data-execution_count="945">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-hidden="true" href="#cb22-1" tabindex="-1"></a>error</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="945">
+<div>
+<table class="dataframe table table-sm table-striped small" data-border="1" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">pred</th>
+<th data-quarto-table-cell-role="th">true</th>
+<th data-quarto-table-cell-role="th">error</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">cohort</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-06-26</td>
+<td>103.012053</td>
+<td>102.0</td>
+<td>1.012053</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2023-07-10</td>
+<td>29.945987</td>
+<td>29.0</td>
+<td>0.945987</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-07-17</td>
+<td>19.397071</td>
+<td>30.0</td>
+<td>-10.602929</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2023-07-31</td>
+<td>66.781618</td>
+<td>53.0</td>
+<td>13.781618</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-08-07</td>
+<td>116.841563</td>
+<td>132.0</td>
+<td>-15.158437</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2023-08-21</td>
+<td>23.550372</td>
+<td>34.0</td>
+<td>-10.449628</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2023-08-28</td>
+<td>18.436283</td>
+<td>45.0</td>
+<td>-26.563717</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2023-09-11</td>
+<td>65.928169</td>
+<td>67.0</td>
+<td>-1.071831</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="948">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-hidden="true" href="#cb23-1" tabindex="-1"></a>(<span class="dv">18</span> <span class="op">+</span> <span class="dv">48</span>)<span class="op">/</span><span class="dv">2</span></span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="948">
+<pre><code>33.0</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="709">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a aria-hidden="true" href="#cb25-1" tabindex="-1"></a><span class="kw">def</span> relevant_apps(row):</span>
+<span id="cb25-2"><a aria-hidden="true" href="#cb25-2" tabindex="-1"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb25-3"><a aria-hidden="true" href="#cb25-3" tabindex="-1"></a>    <span class="cf">if</span> row.num_se <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb25-4"><a aria-hidden="true" href="#cb25-4" tabindex="-1"></a>        total <span class="op">+=</span> row.apps_se</span>
+<span id="cb25-5"><a aria-hidden="true" href="#cb25-5" tabindex="-1"></a>    <span class="cf">if</span> row.num_ds <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb25-6"><a aria-hidden="true" href="#cb25-6" tabindex="-1"></a>        total <span class="op">+=</span> row.apps_ds</span>
+<span id="cb25-7"><a aria-hidden="true" href="#cb25-7" tabindex="-1"></a>    <span class="cf">if</span> row.num_emerging <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb25-8"><a aria-hidden="true" href="#cb25-8" tabindex="-1"></a>        total <span class="op">+=</span> row.apps_emerging</span>
+<span id="cb25-9"><a aria-hidden="true" href="#cb25-9" tabindex="-1"></a>    <span class="cf">return</span> total</span>
+<span id="cb25-10"><a aria-hidden="true" href="#cb25-10" tabindex="-1"></a></span>
+<span id="cb25-11"><a aria-hidden="true" href="#cb25-11" tabindex="-1"></a>neighbors <span class="op">=</span> neighbors.drop([<span class="st">'apps_se'</span>, <span class="st">'apps_ds'</span>, <span class="st">'apps_emerging'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="789" data-tags="[]">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a aria-hidden="true" href="#cb26-1" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">4</span>,<span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">6</span>))</span>
+<span id="cb26-2"><a aria-hidden="true" href="#cb26-2" tabindex="-1"></a><span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(axs.ravel()):</span>
+<span id="cb26-3"><a aria-hidden="true" href="#cb26-3" tabindex="-1"></a>    preds <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb26-4"><a aria-hidden="true" href="#cb26-4" tabindex="-1"></a>    <span class="cf">for</span> cohort <span class="kw">in</span> neighbors.cohort_start_date.unique():</span>
+<span id="cb26-5"><a aria-hidden="true" href="#cb26-5" tabindex="-1"></a></span>
+<span id="cb26-6"><a aria-hidden="true" href="#cb26-6" tabindex="-1"></a>        <span class="cf">for</span> days_till <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">60</span>):</span>
+<span id="cb26-7"><a aria-hidden="true" href="#cb26-7" tabindex="-1"></a></span>
+<span id="cb26-8"><a aria-hidden="true" href="#cb26-8" tabindex="-1"></a>            frame <span class="op">=</span> neighbors.query(<span class="ss">f'cohort_start_date == "</span><span class="sc">{</span>cohort<span class="sc">}</span><span class="ss">" and days_till_start == </span><span class="sc">{</span>days_till<span class="sc">}</span><span class="ss">'</span>).iloc[<span class="dv">0</span>]</span>
+<span id="cb26-9"><a aria-hidden="true" href="#cb26-9" tabindex="-1"></a>            obs <span class="op">=</span> [frame.drop([<span class="st">'matriculations'</span>, <span class="st">'cohort_start_date'</span>, <span class="st">'days_till_start'</span>]).to_list()]</span>
+<span id="cb26-10"><a aria-hidden="true" href="#cb26-10" tabindex="-1"></a>            true <span class="op">=</span> frame.matriculations</span>
+<span id="cb26-11"><a aria-hidden="true" href="#cb26-11" tabindex="-1"></a></span>
+<span id="cb26-12"><a aria-hidden="true" href="#cb26-12" tabindex="-1"></a>            X_ <span class="op">=</span> neighbors.query(<span class="ss">f'cohort_start_date &lt; "</span><span class="sc">{</span>cohort<span class="sc">}</span><span class="ss">" and days_till_start &gt;= </span><span class="sc">{</span>days_till<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb26-13"><a aria-hidden="true" href="#cb26-13" tabindex="-1"></a>            X <span class="op">=</span> X_.drop([<span class="st">'matriculations'</span>, <span class="st">'cohort_start_date'</span>, <span class="st">'days_till_start'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb26-14"><a aria-hidden="true" href="#cb26-14" tabindex="-1"></a>            scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb26-15"><a aria-hidden="true" href="#cb26-15" tabindex="-1"></a>            <span class="cf">if</span> <span class="kw">not</span> X.empty:</span>
+<span id="cb26-16"><a aria-hidden="true" href="#cb26-16" tabindex="-1"></a>                X <span class="op">=</span> scaler.fit_transform(X.to_numpy())</span>
+<span id="cb26-17"><a aria-hidden="true" href="#cb26-17" tabindex="-1"></a>                y <span class="op">=</span> X_.matriculations</span>
+<span id="cb26-18"><a aria-hidden="true" href="#cb26-18" tabindex="-1"></a></span>
+<span id="cb26-19"><a aria-hidden="true" href="#cb26-19" tabindex="-1"></a>                model <span class="op">=</span> KNeighborsRegressor(n_neighbors<span class="op">=</span>i<span class="op">+</span><span class="dv">1</span>, p<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb26-20"><a aria-hidden="true" href="#cb26-20" tabindex="-1"></a>                model.fit(X, y)</span>
+<span id="cb26-21"><a aria-hidden="true" href="#cb26-21" tabindex="-1"></a>                obs_scaled <span class="op">=</span> scaler.transform(obs)</span>
+<span id="cb26-22"><a aria-hidden="true" href="#cb26-22" tabindex="-1"></a>                <span class="cf">try</span>:</span>
+<span id="cb26-23"><a aria-hidden="true" href="#cb26-23" tabindex="-1"></a>                    pred <span class="op">=</span> model.predict(obs_scaled)[<span class="dv">0</span>]</span>
+<span id="cb26-24"><a aria-hidden="true" href="#cb26-24" tabindex="-1"></a>                <span class="cf">except</span>:</span>
+<span id="cb26-25"><a aria-hidden="true" href="#cb26-25" tabindex="-1"></a>                    <span class="cf">continue</span></span>
+<span id="cb26-26"><a aria-hidden="true" href="#cb26-26" tabindex="-1"></a></span>
+<span id="cb26-27"><a aria-hidden="true" href="#cb26-27" tabindex="-1"></a>                preds <span class="op">=</span> pd.concat([preds, pd.DataFrame([[cohort, days_till, true, pred]], columns<span class="op">=</span>[<span class="st">'cohort'</span>, <span class="st">'days_til'</span>, <span class="st">'true'</span>, <span class="st">'pred'</span>])])</span>
+<span id="cb26-28"><a aria-hidden="true" href="#cb26-28" tabindex="-1"></a>                </span>
+<span id="cb26-29"><a aria-hidden="true" href="#cb26-29" tabindex="-1"></a>    preds <span class="op">=</span> preds.assign(error<span class="op">=</span>preds.pred <span class="op">-</span> preds.true).sort_values(<span class="st">'error'</span>, ascending<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb26-30"><a aria-hidden="true" href="#cb26-30" tabindex="-1"></a>    preds.error.hist(ax<span class="op">=</span>ax)</span>
+<span id="cb26-31"><a aria-hidden="true" href="#cb26-31" tabindex="-1"></a>    ax.set_title(<span class="ss">f"k = </span><span class="sc">{</span>i <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ch">\n</span><span class="ss"> Mean Error: </span><span class="sc">{</span>preds<span class="sc">.</span>error<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb26-32"><a aria-hidden="true" href="#cb26-32" tabindex="-1"></a></span>
+<span id="cb26-33"><a aria-hidden="true" href="#cb26-33" tabindex="-1"></a>fig.tight_layout()</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img class="img-fluid" src="{%  static 'Untitled_files/figure-html/cell-18-output-1.png' %}"/></p>
+</div>
+</div>
+<div class="cell" data-execution_count="770">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a aria-hidden="true" href="#cb27-1" tabindex="-1"></a>preds <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb27-2"><a aria-hidden="true" href="#cb27-2" tabindex="-1"></a><span class="cf">for</span> cohort <span class="kw">in</span> neighbors.cohort_start_date.unique():</span>
+<span id="cb27-3"><a aria-hidden="true" href="#cb27-3" tabindex="-1"></a></span>
+<span id="cb27-4"><a aria-hidden="true" href="#cb27-4" tabindex="-1"></a>    <span class="cf">for</span> days_till <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">60</span>):</span>
+<span id="cb27-5"><a aria-hidden="true" href="#cb27-5" tabindex="-1"></a></span>
+<span id="cb27-6"><a aria-hidden="true" href="#cb27-6" tabindex="-1"></a>        frame <span class="op">=</span> neighbors.query(<span class="ss">f'cohort_start_date == "</span><span class="sc">{</span>cohort<span class="sc">}</span><span class="ss">" and days_till_start == </span><span class="sc">{</span>days_till<span class="sc">}</span><span class="ss">'</span>).iloc[<span class="dv">0</span>]</span>
+<span id="cb27-7"><a aria-hidden="true" href="#cb27-7" tabindex="-1"></a>        obs <span class="op">=</span> [frame.drop([<span class="st">'matriculations'</span>, <span class="st">'cohort_start_date'</span>, <span class="st">'days_till_start'</span>]).to_list()]</span>
+<span id="cb27-8"><a aria-hidden="true" href="#cb27-8" tabindex="-1"></a>        true <span class="op">=</span> frame.matriculations</span>
+<span id="cb27-9"><a aria-hidden="true" href="#cb27-9" tabindex="-1"></a></span>
+<span id="cb27-10"><a aria-hidden="true" href="#cb27-10" tabindex="-1"></a>        X_ <span class="op">=</span> neighbors.query(<span class="ss">f'cohort_start_date &lt; "</span><span class="sc">{</span>cohort<span class="sc">}</span><span class="ss">" and days_till_start &gt;= </span><span class="sc">{</span>days_till<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb27-11"><a aria-hidden="true" href="#cb27-11" tabindex="-1"></a>        X <span class="op">=</span> X_.drop([<span class="st">'matriculations'</span>, <span class="st">'cohort_start_date'</span>, <span class="st">'days_till_start'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb27-12"><a aria-hidden="true" href="#cb27-12" tabindex="-1"></a>        scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb27-13"><a aria-hidden="true" href="#cb27-13" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> X.empty:</span>
+<span id="cb27-14"><a aria-hidden="true" href="#cb27-14" tabindex="-1"></a>            X <span class="op">=</span> scaler.fit_transform(X.to_numpy())</span>
+<span id="cb27-15"><a aria-hidden="true" href="#cb27-15" tabindex="-1"></a>            y <span class="op">=</span> X_.matriculations</span>
+<span id="cb27-16"><a aria-hidden="true" href="#cb27-16" tabindex="-1"></a></span>
+<span id="cb27-17"><a aria-hidden="true" href="#cb27-17" tabindex="-1"></a>            model <span class="op">=</span> KNeighborsRegressor(n_neighbors<span class="op">=</span><span class="dv">1</span>, p<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb27-18"><a aria-hidden="true" href="#cb27-18" tabindex="-1"></a>            model.fit(X, y)</span>
+<span id="cb27-19"><a aria-hidden="true" href="#cb27-19" tabindex="-1"></a>            obs_scaled <span class="op">=</span> scaler.transform(obs)</span>
+<span id="cb27-20"><a aria-hidden="true" href="#cb27-20" tabindex="-1"></a>            <span class="cf">try</span>:</span>
+<span id="cb27-21"><a aria-hidden="true" href="#cb27-21" tabindex="-1"></a>                pred <span class="op">=</span> model.predict(obs_scaled)[<span class="dv">0</span>]</span>
+<span id="cb27-22"><a aria-hidden="true" href="#cb27-22" tabindex="-1"></a>            <span class="cf">except</span>:</span>
+<span id="cb27-23"><a aria-hidden="true" href="#cb27-23" tabindex="-1"></a>                <span class="cf">continue</span></span>
+<span id="cb27-24"><a aria-hidden="true" href="#cb27-24" tabindex="-1"></a></span>
+<span id="cb27-25"><a aria-hidden="true" href="#cb27-25" tabindex="-1"></a>            preds <span class="op">=</span> pd.concat([preds, pd.DataFrame([[cohort, days_till, true, pred]], columns<span class="op">=</span>[<span class="st">'cohort'</span>, <span class="st">'days_til'</span>, <span class="st">'true'</span>, <span class="st">'pred'</span>])])</span>
+<span id="cb27-26"><a aria-hidden="true" href="#cb27-26" tabindex="-1"></a></span>
+<span id="cb27-27"><a aria-hidden="true" href="#cb27-27" tabindex="-1"></a>preds <span class="op">=</span> preds.assign(error<span class="op">=</span>preds.pred <span class="op">-</span> preds.true).sort_values(<span class="st">'error'</span>, ascending<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb27-28"><a aria-hidden="true" href="#cb27-28" tabindex="-1"></a>preds.error.hist()</span>
+<span id="cb27-29"><a aria-hidden="true" href="#cb27-29" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"k = 1</span><span class="ch">\n</span><span class="ss"> Mean Error: </span><span class="sc">{</span>preds<span class="sc">.</span>error<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">"</span>)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>k = 1
+ Mean Error: 7.098198198198198</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img class="img-fluid" src="{%  static 'Untitled_files/figure-html/cell-19-output-2.png' %}"/></p>
+</div>
+</div>
+<div class="cell" data-execution_count="676">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a aria-hidden="true" href="#cb29-1" tabindex="-1"></a>neighbors[neighbors.cohort_start_date.isin(low_error_cohorts)].drop_duplicates(<span class="st">'cohort_start_date'</span>)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="676">
+<div>
+<table class="dataframe table table-sm table-striped small" data-border="1" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">cohort_start_date</th>
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">days_till_start</th>
+<th data-quarto-table-cell-role="th">num_cohorts</th>
+<th data-quarto-table-cell-role="th">num_se</th>
+<th data-quarto-table-cell-role="th">num_ds</th>
+<th data-quarto-table-cell-role="th">num_emerging</th>
+<th data-quarto-table-cell-role="th">apps_ds</th>
+<th data-quarto-table-cell-role="th">apps_emerging</th>
+<th data-quarto-table-cell-role="th">num_registered</th>
+<th data-quarto-table-cell-role="th">num_committed</th>
+<th data-quarto-table-cell-role="th">scholarships_given</th>
+<th data-quarto-table-cell-role="th">matriculations</th>
+<th data-quarto-table-cell-role="th">relevant_apps</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">93</td>
+<td>2023-07-10</td>
+<td>6.0</td>
+<td>37</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>710</td>
+<td>1694</td>
+<td>43</td>
+<td>25</td>
+<td>45</td>
+<td>29.0</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">279</td>
+<td>2023-08-28</td>
+<td>7.0</td>
+<td>33</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>674</td>
+<td>1623</td>
+<td>105</td>
+<td>54</td>
+<td>84</td>
+<td>45.0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">321</td>
+<td>2023-07-17</td>
+<td>6.0</td>
+<td>40</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>714</td>
+<td>1656</td>
+<td>76</td>
+<td>30</td>
+<td>30</td>
+<td>30.0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">376</td>
+<td>2023-08-21</td>
+<td>7.0</td>
+<td>25</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>667</td>
+<td>1614</td>
+<td>83</td>
+<td>54</td>
+<td>104</td>
+<td>34.0</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+</body></html>
+    {% if 'share' in request.path %}
+    <script>
+        var element = document.getElementById("copy-button");
+        element.remove();
+    </script>
+    {% endif %}
+
