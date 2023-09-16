@@ -1,0 +1,11 @@
+---
+title: "Report 2"
+author: "Tristan O'Malley"
+date: "2023-06-11"
+categories: [news]
+comments:
+  hypothesis: 
+    theme: clean
+---
+
+This is the first post in a Quarto blog. Welcome!

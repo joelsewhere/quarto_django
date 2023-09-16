@@ -1,0 +1,41 @@
+---
+title: my coolio projectio
+listing:
+  type: table
+  contents: 
+    - projects/*/*/index.qmd
+    - projects/*/*/index.rmd
+    - projects/*/*/index.ipynb
+  sort: "date desc"
+  categories: true
+  sort-ui: [title, date, author, reading-time]
+  filter-ui: true
+  fields: [date, title, author, reading-time]
+page-layout: full
+title-block-banner: true
+---
+
+## Project Folders
+
+```{=html}
+<div class="quarto-listing quarto-listing-container-grid">
+    <div class="listing-actions-group">
+    <div class="list grid quarto-listing-cols-4">
+    {% for project in projects %}
+    <div class="g-col-1" style="max-width: 20rem;">
+        <a href="/{{ project.get('href') }}" class="quarto-grid-link">
+            <div class="quarto-grid-item card h-100 card-left">
+                <div class="card-body">
+                    <h4 class="card-title">{{ project.get("name") }}</h4>
+                </div>
+                <div class="listing-item-img-placeholder card-img-bottom" style="height: 50px; background: {{ project.get('color') }};"></div>
+          </div>
+        </a>
+    </div>
+    {% endfor %}
+    </div>
+    </div>
+    </div>
+```
+
+## Recent Reports

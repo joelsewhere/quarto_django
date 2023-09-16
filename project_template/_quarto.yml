@@ -1,0 +1,27 @@
+format:
+  html:
+    css: styles.css
+    theme: yeti
+project:
+  pre-render: 
+    - scripts/pre_render/generate_projects_menu.py
+  post-render:
+    - scripts/post_render/set_django_html.py
+    - scripts/post_render/copy_to_django.py
+    {% if use_group_permissions %}
+    - scripts/post_render/update_department_model.py {% endif %}
+  type: website
+ipynb-filters:
+  - scripts/notebook_filters/remove_logging.py
+website:
+  navbar:
+    right:
+    - about.qmd
+    {% if use_social_auth %}
+    - href: /logout
+      icon: door-closed
+      text: Logout {% endif %}
+    left:
+    - href: /
+      icon: bar-chart-fill
+title: {{ project_title }}

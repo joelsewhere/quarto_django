@@ -1,0 +1,15 @@
+---
+title: "Project F"
+listing:
+  type: grid
+  contents: .
+  sort: "date desc"
+  categories: true
+  sort-ui: true
+  filter-ui: true
+  fields: [image, date, title, author, reading-time, Applause]
+page-layout: full
+title-block-banner: true
+---
+
+## Recent Reports

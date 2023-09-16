@@ -1,0 +1,23 @@
+format:
+  html:
+    css: styles.css
+    theme: yeti
+project:
+  pre-render: 
+    - scripts/pre_render/generate_projects_menu.py
+  post-render:
+    - scripts/post_render/set_django_html.py
+    - scripts/post_render/copy_to_django.py
+    
+  type: website
+ipynb-filters:
+  - scripts/notebook_filters/remove_logging.py
+website:
+  navbar:
+    right:
+    - about.qmd
+    
+    left:
+    - href: /
+      icon: bar-chart-fill
+title: my coolio projectio
