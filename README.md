@@ -5,7 +5,7 @@ This project generates starter code that uses [Quarto](https://quarto.org/) for 
 The goal of this project was to bridge the gap between the _very_ useful tooling provided by quarto and the way data folks actually want to use the tool (for website building specifically). 
 
 ### Motivation
-Quarto provides tooling for converting common data analysis files into webpage reports, and fits it all into an easy to use blog-style project. BUT, quarto produces _static_ websites. In my case, [and a few others](https://github.com/quarto-dev/quarto-cli/discussions/6629), I wanted to use quarto so I could easily take an analysis run in jupyter and share it with stakeholders (via a link) without the time sucking process of moving every piece of content from a jupyter notebook into a google doc/slide-deck. For this to work, however, I needed the ability to limit who can see data analyses I publish. Preferably though social authentication like google-auth. This requires a backend.
+Quarto provides tooling for converting common data analysis files into webpage reports, and fits it all into an easy to use blog-style project. BUT, quarto produces _static_ websites. In my case, [and a few others](https://github.com/quarto-dev/quarto-cli/discussions/6629), I wanted to use quarto so I could easily take an analysis run in jupyter and share it with stakeholders (via a link) without the time sucking process of moving every piece of content from a jupyter notebook into a google doc/slide-deck. For this to work, however, I needed the ability to limit who can see data analyses I publish. Preferably through social authentication like google-auth. This requires a backend.
 
 ## How to use it
 1. Clone this repository
