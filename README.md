@@ -43,8 +43,8 @@ root_directory
             modeling
                 index.ipynb
 ```
-- Whatever parent folders are places within the projects directory will appear on the homepage as colored tiles visualized above. 
-- Whatever `index.qmd` or `index.ipynb` files placed within project subdirectories will be visualized as a table at the bottom of the homepage and will appear in the landing page for each parent project folder. So if you click on the `Project A` tile of the homepage, you will see the following webpage listing all the available reports within that project:
+- Whatever parent folders are placed within the projects directory will appear on the homepage as colored tiles visualized above. 
+- `index.qmd` and `index.ipynb` files placed within project subdirectories will be visualized in a table at the bottom of the homepage and will appear in the landing page for each parent project folder. So if you click on the `Project A` tile of the homepage, you will see the following webpage which lists all the available reports within that project:
 <center><img src="readme-images/project_a.png" style="height: 400px;"></img></center>
 - To add a new project, a python script is added to `bin/` within the project root
     - `python bin/new_project.py`
