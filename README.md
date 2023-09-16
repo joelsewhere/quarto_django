@@ -1,6 +1,6 @@
 # Quarto-Django
 
-This project generates starter code that uses [Quarto](https://quarto.org/) for authoring webpages and a [Django](https://www.djangoproject.com/) backend.
+This project generates starter code that uses [Quarto](https://quarto.org/) for authoring webpages with a [Django](https://www.djangoproject.com/) backend.
 
 The goal of this project was to bridge the gap between the _very_ useful tooling provided by quarto and the way data folks actually want to use the tool (for website building specifically). 
 
